@@ -14,4 +14,15 @@ export default {
       };
     }
   },
+  footer: {
+    text: (
+      <span>
+        AGPLv3 {new Date().getFullYear()} ©{" "}
+        <a href="https://mibanco.app" target="_blank">
+          Banco
+        </a>
+        .
+      </span>
+    ),
+  },
 };
