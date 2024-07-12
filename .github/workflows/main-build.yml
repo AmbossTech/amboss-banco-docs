@@ -36,7 +36,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
           ECR_REGISTRY_ALIAS: d6h3d6x3
-          ECR_REPOSITORY: amboss-banco
+          ECR_REPOSITORY: amboss-banco-docs
         run: |
           DOCKER_IMAGE=$ECR_REGISTRY/$ECR_REGISTRY_ALIAS/$ECR_REPOSITORY
           SHORTREF=${GITHUB_SHA::8}
