@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "npx prettier . --write"
   },
   "dependencies": {
     "next": "^14.2.4",
@@ -10,5 +11,8 @@
     "nextra-theme-docs": "^2.13.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "prettier": "3.3.3"
   }
 }
