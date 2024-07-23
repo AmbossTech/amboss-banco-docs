@@ -1,0 +1,95 @@
+import { Callout } from "nextra/components";
+
+# Banco Security Overview
+
+Banco is a cryptocurrency web wallet that prioritizes your security while ensuring a seamless and user-friendly experience. It is designed to make creating and managing your wallet as straightforward as possible, right within our website, without compromising on security.
+
+We drew significant inspiration from Bitwarden's renowned encryption model, adopting many of its best practices to enhance our own security measures. By integrating these proven strategies, we ensure that our users benefit from cutting-edge security protocols that are both reliable and robust.
+
+## Banco Security Principles
+
+Banco utilizes the following key security measures to protect user data.
+
+**Client-side encryption:** All cryptographic keys are generated and encrypted on the client. No sensitive cleartext information ever reaches the server.
+
+**Zero knowledge encryption:** The server and database only have access to sensitive information in encrypted form. We never store and cannot get access to your password or any sensitive information. Even if we wanted to!
+
+<Callout emoji="⚠️">
+  Since we never store or have access to your password, if you forget your
+  password there is no way to recover any information from that account!
+</Callout>
+
+**Open source:** The source code for the Banco website and the Banco API server are hosted on [Github](https://github.com/AmbossTech). We welcome everyone to review, audit, and contribute to the Banco codebase.
+
+**Modern Encryption:** Banco employs a combination of hashing, symmetric and asymmetric keys, HMAC-SHA256, ChaCha20, and other advanced encryption techniques to ensure robust security.
+
+## Master Password
+
+User data protection in Banco begins the moment a user creates an account. During the sign up process we highly recommend a strong master password since this will be the main entropy to encrypt and decrypt a users sensitive information. Banco has the option to create a strong password and there is a strength meter to measure the level of entropy of the password.
+
+<Callout emoji="⚠️">
+  You are responsible for keeping your account secure while you use the Banco
+  services.
+</Callout>
+
+**It is very important that you never forget your master password.** The master password is cleared from memory after usage and never transmitted over the Internet to Banco servers, therefore there is no way to recover the password in the event that you forget it.
+
+This also means no one from the Banco team can ever see, read, or reverse engineer to get to your sensitive data. All sensitive data is fully encrypted and/or hashed before ever leaving your local device. This is a critical step that Banco takes to protect you and your data.
+
+After creating your account and specifying your master password, Banco generates several additional keys that are used in protecting your account’s data and for different functionalities.
+
+## Overview of Account and Wallet Creation Process
+
+### Password and Master Key
+
+When an account is created, Banco uses the Key Derivation Function (KDF) Argon2id to generate a master key, with the password as the key and the email as the salt. The master key is never stored or transmitted to Banco servers.
+
+<Callout type="info" emoji="💡">
+  [Argon2](https://en.wikipedia.org/wiki/Argon2) is the winner of the 2015
+  [Password Hashing Competition](https://www.password-hashing.net/). Argon2id is
+  a hybrid variant of Argon2, designed to provide strong security against both
+  brute-force and side-channel attacks. It combines the best features of Argon2i
+  and Argon2d, using data-dependent and data-independent memory access to
+  protect against various attacks. Argon2id is highly configurable, allowing
+  adjustments in memory usage, execution time, and degree of parallelism, making
+  it an excellent choice for secure password hashing.
+</Callout>
+
+A master password hash is created using Argon2id, with the master key as the key and the password as the salt. This hash is transmitted to the Banco servers for authentication. Upon receipt, the Banco server rehashes it using Argon2id with a random salt. This new hash is then stored on the Banco servers.
+
+![Password and Master Key](/assets/security/passwordAndMasterKey.png)
+_Password and Master Key Flow_
+
+### Account Creation
+
+During the account creation process, a 256-bit symmetric key and a secp256k1 key pair are generated. The symmetric key is encrypted using ChaCha20 and the master key, resulting in an encrypted symmetric key. This encrypted symmetric key, which serves as the main encryption key for the user, is sent to the Banco server and later returned to the client for client-side encryption and decryption.
+
+The secp256k1 key pair is used for sharing data between users. The private key is encrypted using ChaCha20 and the symmetric key, creating an encrypted private key. Both the encrypted private key and the public key are sent to the Banco servers upon account creation.
+
+<Callout type="info" emoji="💡">
+  [ChaCha20](https://en.wikipedia.org/wiki/Salsa20#ChaCha_variant) is a
+  high-speed, stream cipher designed for strong encryption with excellent
+  performance on various hardware, including those lacking specialized
+  cryptographic capabilities. It is known for its simplicity and resistance to
+  cryptographic attacks, providing both speed and security. ChaCha20 encrypts
+  data by generating a pseudorandom stream of bits (keystream) which is then
+  XORed with the plaintext, ensuring secure and efficient data encryption.
+</Callout>
+
+![Account Creation Flow](/assets/security/accountCreationFlow.png)
+_Account Creation Flow_
+
+### Wallet Creation
+
+During the wallet creation process, a twelve-word mnemonic and a secp256k1 key pair are generated. The mnemonic, created using an [audited BIP39 implementation](https://github.com/paulmillr/scure-bip39), is encrypted with ChaCha20 and the account's symmetric key, and then sent to the Banco servers. This mnemonic serves as the main source of entropy for all cryptocurrency accounts associated with the wallet.
+
+The secp256k1 key pair is used for sharing data between users. The private key is encrypted with ChaCha20 and the symmetric key, creating an encrypted private key. Both the encrypted private key and the public key are sent to the Banco servers upon account creation.
+
+![Wallet Creation Flow](/assets/security/walletCreationFlow.png)
+_Wallet Creation Flow_
+
+A default Liquid wallet is generated from the mnemonic. The descriptor for this wallet is sent to the Banco servers, enabling it to generate addresses on demand for specific Banco functionalities.
+
+## Overview of Encryption and Decryption Process
+
+Sensitive information, (private keys, mnemonics, messages) associated with your account, are protected with end-to-end encryption using ChaCha20 and your symmetric key. All encryption and decryption of your sensitive data are performed entirely on the Banco client, as the symmetric key can only be decrypted by the master key, which is never stored or transmitted to Banco servers.
