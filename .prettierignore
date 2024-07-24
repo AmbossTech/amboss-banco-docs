@@ -36,6 +36,3 @@ yarn-error.log*
 next-env.d.ts
 
 .env
-
-# files causing syntax errors
-/pages/legal/privacy-policy.mdx
