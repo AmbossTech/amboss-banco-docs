@@ -7,6 +7,7 @@
     "lint": "npx prettier . --check"
   },
   "dependencies": {
+    "lucide-react": "^0.414.0",
     "next": "^14.2.4",
     "nextra": "^2.13.4",
     "nextra-theme-docs": "^2.13.4",

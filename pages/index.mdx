@@ -3,6 +3,76 @@ title: MiBanco
 description: Banking for the Unbanked.
 ---
 
+import { Cards, Card } from "nextra/components";
+import { ShieldCheck, Server } from "lucide-react";
+import { Callout } from "nextra/components";
+
 # Mi Banco
 
-**Banking for the Unbanked.**
+Banco is a self-custodial cryptocurrency web wallet that prioritizes your security while ensuring a seamless and user-friendly experience. It is designed to make creating and managing your wallet as straightforward as possible, right within our website, without compromising on security.
+
+## Sections
+
+<Cards>
+  <Card icon={<ShieldCheck />} title="Security" href="/security" />
+  <Card icon={<Server />} title="Self Hosting" href="/self-hosting/frontend" />
+</Cards>
+
+## FAQ
+
+### What is MiBanco?
+
+MiBanco is a cryptocurrency app that allows you to manage Bitcoin and Tether, interact with various layers of the Bitcoin ecosystem, and leverage the Lightning Network for fast, secure transactions.
+
+### Why should I trust you?
+
+Our source code is available and accessible on GitHub so you can read it and review it to ensure our code does what we say. Anyone can view, review and inspect the code we’re running to verify that we practice what we preach. This is essential in the market of cryptocurrency wallet software. The only way to prove your trust is to allow experts to look into your code and verify that you’re actually doing what you’re saying you’re doing.
+
+### How does MiBanco ensure the security of my assets?
+
+MiBanco employs advanced hashing and encryption methods, including ChaCha20, Argon2id, and HMAC-SHA256, to protect your assets and sensitive information with robust end-to-end encryption.
+
+<Callout type="info" emoji="💡">
+  Check out the [security section](/security) for more in detail security
+  documentation.
+</Callout>
+
+### What cryptocurrencies does MiBanco support?
+
+MiBanco currently supports Bitcoin and Tether.
+
+### Can I use MiBanco for everyday transactions?
+
+Absolutely! MiBanco is designed to facilitate both everyday transactions and more advanced cryptocurrency activities, making it versatile and user-friendly.
+
+### Is there a limit to how much cryptocurrency I can store on MiBanco?
+
+MiBanco does not impose specific limits on the amount of cryptocurrency you can store, but ensure you adhere to best practices for security and storage.
+
+### How do I create a new wallet with MiBanco?
+
+During the account creation process, MiBanco creates an initial wallet. Later you can create more wallets using the Banco client.
+
+### How does MiBanco interact with the Lightning Network?
+
+MiBanco uses swaps provided by [Boltz](https://boltz.exchange/) to send and receive over the Lightning Network.
+
+### Can I change my lightning address?
+
+It is not currently possible to change your Lightning address.
+
+### How does the Lightning address work?
+
+The Lightning address is using swaps behind the scenes to allow you to receive and send Lightning payments without needing to run a Lightning node.
+
+### What happens if I lose my mnemonic or password?
+
+Your mnemonic is encrypted and stored on Banco servers which you can decrypt using your account password. If you forget your password, your sensitive information is unrecoverable.
+
+### What is the role of the symmetric key in MiBanco?
+
+The symmetric key is used for encrypting and decrypting your sensitive data, ensuring that only you can access your private information.
+
+### What should I do if I encounter an issue with MiBanco?
+
+If you experience any issues or have questions, please [contact our support team](mailto:support@amboss.tech).
