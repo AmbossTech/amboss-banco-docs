@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
 
 export default {
-  logo: <b>BANCO</b>,
+  logo: <b>MiBanco</b>,
   docsRepositoryBase: "https://github.com/AmbossTech/amboss-banco-docs",
   project: {
     link: "https://github.com/AmbossTech/",
@@ -11,7 +11,7 @@ export default {
     const { asPath } = useRouter();
     if (asPath !== "/") {
       return {
-        titleTemplate: "%s – Banco",
+        titleTemplate: "%s – MiBanco",
       };
     }
   },
@@ -38,7 +38,7 @@ export default {
       <span>
         AGPLv3 {new Date().getFullYear()} ©{" "}
         <a href="https://mibanco.app" target="_blank">
-          Banco
+          MiBanco
         </a>
         .
       </span>

@@ -1,19 +1,19 @@
 ---
 title: Security
-description: Banco Security Overview.
+description: MiBanco Security Overview.
 ---
 
 import { Callout } from "nextra/components";
 
-# Banco Security Overview
+# MiBanco Security Overview
 
-Banco is a self-custodial cryptocurrency web wallet that prioritizes your security while ensuring a seamless and user-friendly experience. It is designed to make creating and managing your wallet as straightforward as possible, right within our website, without compromising on security.
+MiBanco is a self-custodial cryptocurrency web wallet that prioritizes your security while ensuring a seamless and user-friendly experience. It is designed to make creating and managing your wallet as straightforward as possible, right within our website, without compromising on security.
 
 We drew significant inspiration from Bitwarden's renowned encryption model, adopting many of its best practices to enhance our own security measures. By integrating these proven strategies, we ensure that our users benefit from cutting-edge security protocols that are both reliable and robust.
 
-## Banco Security Principles
+## MiBanco Security Principles
 
-Banco utilizes the following key security measures to protect user data.
+MiBanco utilizes the following key security measures to protect user data.
 
 **Client-side encryption:** All cryptographic keys are generated and encrypted on the client. No sensitive cleartext information ever reaches the server.
 
@@ -24,30 +24,30 @@ Banco utilizes the following key security measures to protect user data.
   password there is no way to recover any information from that account!
 </Callout>
 
-**Open source:** The source code for the Banco website and the Banco API server are hosted on [Github](https://github.com/AmbossTech). We welcome everyone to review, audit, and contribute to the Banco codebase.
+**Open source:** The source code for the MiBanco website and the MiBanco API server are hosted on [Github](https://github.com/AmbossTech). We welcome everyone to review, audit, and contribute to the MiBanco codebase.
 
-**Modern Encryption:** Banco employs a combination of hashing, symmetric and asymmetric keys, HMAC-SHA256, ChaCha20, and other advanced encryption techniques to ensure robust security.
+**Modern Encryption:** MiBanco employs a combination of hashing, symmetric and asymmetric keys, HMAC-SHA256, ChaCha20, and other advanced encryption techniques to ensure robust security.
 
 ## Master Password
 
-User data protection in Banco begins the moment a user creates an account. During the sign up process we highly recommend a strong master password since this will be the main entropy to encrypt and decrypt a users sensitive information. Banco has the option to create a strong password and there is a strength meter to measure the level of entropy of the password.
+User data protection in MiBanco begins the moment a user creates an account. During the sign up process we highly recommend a strong master password since this will be the main entropy to encrypt and decrypt a users sensitive information. MiBanco has the option to create a strong password and there is a strength meter to measure the level of entropy of the password.
 
 <Callout type="warning" emoji="⚠️">
-  You are responsible for keeping your account secure while you use the Banco
+  You are responsible for keeping your account secure while you use the MiBanco
   services.
 </Callout>
 
-**It is very important that you never forget your master password.** The master password is cleared from memory after usage and never transmitted over the Internet to Banco servers, therefore there is no way to recover the password in the event that you forget it.
+**It is very important that you never forget your master password.** The master password is cleared from memory after usage and never transmitted over the Internet to MiBanco servers, therefore there is no way to recover the password in the event that you forget it.
 
-This also means no one from the Banco team can ever see, read, or reverse engineer to get to your sensitive data. All sensitive data is fully encrypted and/or hashed before ever leaving your local device. This is a critical step that Banco takes to protect you and your data.
+This also means no one from the MiBanco team can ever see, read, or reverse engineer to get to your sensitive data. All sensitive data is fully encrypted and/or hashed before ever leaving your local device. This is a critical step that MiBanco takes to protect you and your data.
 
-After creating your account and specifying your master password, Banco generates several additional keys that are used in protecting your account’s data and for different functionalities.
+After creating your account and specifying your master password, MiBanco generates several additional keys that are used in protecting your account’s data and for different functionalities.
 
 ## Overview of Account and Wallet Creation Process
 
 ### Password and Master Key
 
-When an account is created, Banco uses the Key Derivation Function (KDF) Argon2id to generate a master key, with the password as the key and the email as the salt. The master key is never stored or transmitted to Banco servers.
+When an account is created, MiBanco uses the Key Derivation Function (KDF) Argon2id to generate a master key, with the password as the key and the email as the salt. The master key is never stored or transmitted to MiBanco servers.
 
 <Callout type="info" emoji="💡">
   [Argon2](https://en.wikipedia.org/wiki/Argon2) is the winner of the 2015
@@ -60,16 +60,16 @@ When an account is created, Banco uses the Key Derivation Function (KDF) Argon2i
   it an excellent choice for secure password hashing.
 </Callout>
 
-A master password hash is created using Argon2id, with the master key as the key and the password as the salt. This hash is transmitted to the Banco servers for authentication. Upon receipt, the Banco server rehashes it using Argon2id with a random salt. This new hash is then stored on the Banco servers.
+A master password hash is created using Argon2id, with the master key as the key and the password as the salt. This hash is transmitted to the MiBanco servers for authentication. Upon receipt, the MiBanco server rehashes it using Argon2id with a random salt. This new hash is then stored on the MiBanco servers.
 
 ![Password and Master Key](/assets/security/passwordAndMasterKey.png)
 _Password and Master Key Flow_
 
 ### Account Creation
 
-During the account creation process, a 256-bit symmetric key and a secp256k1 key pair are generated. The symmetric key is encrypted using ChaCha20 and the master key, resulting in an encrypted symmetric key. This encrypted symmetric key, which serves as the main encryption key for the user, is sent to the Banco server and later returned to the client for client-side encryption and decryption.
+During the account creation process, a 256-bit symmetric key and a secp256k1 key pair are generated. The symmetric key is encrypted using ChaCha20 and the master key, resulting in an encrypted symmetric key. This encrypted symmetric key, which serves as the main encryption key for the user, is sent to the MiBanco server and later returned to the client for client-side encryption and decryption.
 
-The secp256k1 key pair is used for sharing data between users. The private key is encrypted using ChaCha20 and the symmetric key, creating an encrypted private key. Both the encrypted private key and the public key are sent to the Banco servers upon account creation.
+The secp256k1 key pair is used for sharing data between users. The private key is encrypted using ChaCha20 and the symmetric key, creating an encrypted private key. Both the encrypted private key and the public key are sent to the MiBanco servers upon account creation.
 
 <Callout type="info" emoji="💡">
   [ChaCha20](https://en.wikipedia.org/wiki/Salsa20#ChaCha_variant) is a
@@ -86,15 +86,15 @@ _Account Creation Flow_
 
 ### Wallet Creation
 
-During the wallet creation process, a twelve-word mnemonic and a secp256k1 key pair are generated. The mnemonic, created using an [audited BIP39 implementation](https://github.com/paulmillr/scure-bip39), is encrypted with ChaCha20 and the account's symmetric key, and then sent to the Banco servers. This mnemonic serves as the main source of entropy for all cryptocurrency accounts associated with the wallet.
+During the wallet creation process, a twelve-word mnemonic and a secp256k1 key pair are generated. The mnemonic, created using an [audited BIP39 implementation](https://github.com/paulmillr/scure-bip39), is encrypted with ChaCha20 and the account's symmetric key, and then sent to the MiBanco servers. This mnemonic serves as the main source of entropy for all cryptocurrency accounts associated with the wallet.
 
-The secp256k1 key pair is used for sharing data between users. The private key is encrypted with ChaCha20 and the symmetric key, creating an encrypted private key. Both the encrypted private key and the public key are sent to the Banco servers upon account creation.
+The secp256k1 key pair is used for sharing data between users. The private key is encrypted with ChaCha20 and the symmetric key, creating an encrypted private key. Both the encrypted private key and the public key are sent to the MiBanco servers upon account creation.
 
 ![Wallet Creation Flow](/assets/security/walletCreationFlow.png)
 _Wallet Creation Flow_
 
-A default Liquid wallet is generated from the mnemonic. The descriptor for this wallet is sent to the Banco servers, enabling it to generate addresses on demand for specific Banco functionalities.
+A default Liquid wallet is generated from the mnemonic. The descriptor for this wallet is sent to the MiBanco servers, enabling it to generate addresses on demand for specific MiBanco functionalities.
 
 ## Overview of Encryption and Decryption Process
 
-Sensitive information, (private keys, mnemonics, messages) associated with your account, are protected with end-to-end encryption using ChaCha20 and your symmetric key. All encryption and decryption of your sensitive data are performed entirely on the Banco client, as the symmetric key can only be decrypted by the master key, which is never stored or transmitted to Banco servers.
+Sensitive information, (private keys, mnemonics, messages) associated with your account, are protected with end-to-end encryption using ChaCha20 and your symmetric key. All encryption and decryption of your sensitive data are performed entirely on the MiBanco client, as the symmetric key can only be decrypted by the master key, which is never stored or transmitted to MiBanco servers.
