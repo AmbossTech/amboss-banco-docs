@@ -17,11 +17,10 @@ MiBanco utilizes the following key security measures to protect user data.
 
 **Client-side encryption:** All cryptographic keys are generated and encrypted on the client. No sensitive cleartext information ever reaches the server.
 
-**Zero knowledge encryption:** The server and database only have access to sensitive information in encrypted form. We never store and cannot get access to your password or any sensitive information. Even if we wanted to!
+**Zero knowledge encryption:** The server and database only have access to sensitive information in encrypted form. We never store and cannot get access to your password or any sensitive information, even if we wanted to!
 
 <Callout type="warning" emoji="⚠️">
-  Since we never store or have access to your password, if you forget your
-  password there is no way to recover any information from that account!
+Since we never store or have access to your password, if you forget your password there is no way to recover any information or funds from that account!
 </Callout>
 
 **Open source:** The source code for the MiBanco website and the MiBanco API server are hosted on [Github](https://github.com/AmbossTech). We welcome everyone to review, audit, and contribute to the MiBanco codebase.
@@ -41,7 +40,7 @@ User data protection in MiBanco begins the moment a user creates an account. Dur
 
 This also means no one from the MiBanco team can ever see, read, or reverse engineer to get to your sensitive data. All sensitive data is fully encrypted and/or hashed before ever leaving your local device. This is a critical step that MiBanco takes to protect you and your data.
 
-After creating your account and specifying your master password, MiBanco generates several additional keys that are used in protecting your account’s data and for different functionalities.
+After creating your account and specifying your master password, MiBanco generates several additional keys that are used to protect your account’s security and for different functionalities e.g. resetting your password.
 
 ## Overview of Account and Wallet Creation Process
 
