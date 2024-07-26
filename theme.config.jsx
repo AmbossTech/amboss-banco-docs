@@ -24,6 +24,7 @@ export default {
 
     return (
       <>
+        <link rel="icon" href="/docs/favicon.ico" type="image/ico" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content={frontMatter.title || "MiBanco"} />
         <meta
