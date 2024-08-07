@@ -19,7 +19,7 @@ export default {
     const { asPath, defaultLocale, locale } = useRouter();
     const { frontMatter } = useConfig();
     const url =
-      "https://mibanco.app" +
+      "https://bancolibre.com" +
       (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
 
     return (
@@ -38,7 +38,7 @@ export default {
     text: (
       <span>
         AGPLv3 {new Date().getFullYear()} ©{" "}
-        <a href="https://mibanco.app" target="_blank">
+        <a href="https://bancolibre.com" target="_blank">
           BancoLibre
         </a>
         .
